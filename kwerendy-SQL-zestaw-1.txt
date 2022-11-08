@@ -1,0 +1,26 @@
+zad 1
+CREATE TABLE postacie 
+(id int, 
+nazwa varchar(40),
+rodzaj enum ('ptak','wiking','kobieta'),
+data_ur date,
+wiek int check ( wiek >= 0)
+);
+
+INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
+VALUES ('1','Bjorn','wiking','876-12-02','42');
+INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
+VALUES ('2','Drozd','ptak','900-04-02','12');
+INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
+VALUES ('3','tesciowa','kobieta','831-12-05','88');
+
+
+zad 2(do poprawy)
+CREATE TABLE walizka
+(id_walizki int PRIMARY KEY AUTO_INCREMENT,
+pojemnosc float ,
+kolor enum ('rozowy','czerwony', 'teczowy', 'zolty'),
+id_wlasciciela int
+);
+INSERT INTO walizka (id_walizki,pojemnosc,kolor,id_wlasciciela)
+VALUES ('1','50','czerwony','1');
