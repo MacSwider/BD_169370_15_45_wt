@@ -1,26 +1,54 @@
-zad 1
-CREATE TABLE postacie 
-(id int, 
+
+ZAD 1
+
+CREATE TABLE postacie
+(id int PRIMARY KEY AUTO_INCREMENT, 
 nazwa varchar(40),
-rodzaj enum ('ptak','wiking','kobieta'),
+rodzaj enum ('ptak', 'wiking', 'kobieta'),
 data_ur date,
-wiek int check ( wiek >= 0)
+wiek int check (wiek >= 0)
 );
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Bjorn','wiking','876-12-02','42');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Drozd','ptak','900-04-02','12');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('tesciowa','kobieta','831-12-05','87');
 
-INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
-VALUES ('1','Bjorn','wiking','876-12-02','42');
-INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
-VALUES ('2','Drozd','ptak','900-04-02','12');
-INSERT INTO postacie (id, nazwa, rodzaj, data_ur, wiek)
-VALUES ('3','tesciowa','kobieta','831-12-05','88');
+UPDATE postacie SET wiek= 88 WHERE id=3;
+
+ZAD 2
 
 
-zad 2(do poprawy)
 CREATE TABLE walizka
 (id_walizki int PRIMARY KEY AUTO_INCREMENT,
 pojemnosc float ,
 kolor enum ('rozowy','czerwony', 'teczowy', 'zolty'),
-id_wlasciciela int
+id_wlasciciela int,
+FOREIGN KEY(id_wlasciciela) references swiderm.postacie(id) ON DELETE CASCADE
 );
-INSERT INTO walizka (id_walizki,pojemnosc,kolor,id_wlasciciela)
-VALUES ('1','50','czerwony','1');
+ ALTER TABLE walizka ALTER kolor SET DEFAULT 'rozowy';
+
+INSERT INTO  walizka (pojemnosc,kolor,id_wlasciciela)
+VALUES (60, 'czerwony',1);
+
+INSERT INTO  walizka (pojemnosc,kolor,id_wlasciciela)
+VALUES (80, 'zolty',3);
+
+ZAD 3
+
+CREATE TABLE izba
+(adres_budynku varchar(60) PRIMARY KEY,
+nazwa_izby varchar(60),
+metraz int check (metraz >= 0),
+wlasciciel int,
+FOREIGN KEY(wlasciciel) references swiderm.postacie(id) ON DELETE SET NULL
+);
+
+ ALTER TABLE izba ADD COLUMN kolor enum ('brazowy', 'szary', 'czarny' ,' krwawy') AFTER metraz;
+ ALTER TABLE izba ALTER kolor SET DEFAULT 'czarny';
+INSERT INTO izba (adres_budynku, nazwa_izby, metraz, wlasciciel)
+VALUES ('Wojownicza 4', 'Spizarnia', 25,1);
+
+ZAD 4
+CREATE TABLE przetwory
