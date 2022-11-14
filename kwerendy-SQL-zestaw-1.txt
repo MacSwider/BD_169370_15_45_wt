@@ -1,4 +1,3 @@
-
 ZAD 1
 
 CREATE TABLE postacie
@@ -52,3 +51,60 @@ VALUES ('Wojownicza 4', 'Spizarnia', 25,1);
 
 ZAD 4
 CREATE TABLE przetwory
+(id_przetworu int PRIMARY KEY AUTO_INCREMENT,
+rok_produkcji date,
+id_wykonawcy int,
+FOREIGN KEY(id_wykonawcy) references swiderm.postacie(id),
+zawartosc varchar(80),
+dodatek varchar(80),
+id_konsumenta int,
+FOREIGN KEY(id_konsumenta) references swiderm.postacie(id)
+);
+ALTER TABLE przetwory ALTER rok_produkcji SET DEFAULT "1654-11-23";
+ALTER TABLE przetwory ALTER dodatek SET DEFAULT 'papryczka chilli';
+INSERT INTO przetwory (id_wykonawcy,zawartosc,id_konsumenta)
+VALUES (1, 'bigos', 3);
+
+ZAD 5
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Fafnir','wiking','872-06-10','46');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Sigurd','wiking','883-04-13','35');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Njall','wiking','887-10-22','31');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Ragnar','wiking','866-09-12','40');
+INSERT INTO postacie (nazwa, rodzaj, data_ur, wiek)
+VALUES ('Magnus','wiking','877-02-14','29');
+
+CREATE TABLE statek
+(nazwa_statku varchar(30) PRIMARY KEY,
+rodzaj_statku enum ('knar','drakkar','snekkar'),
+data_wodowania date,
+max_ladownosc int check (max_ladownosc > 0)
+);
+INSERT INTO statek (nazwa_statku,rodzaj_statku,data_wodowania,max_ladownosc)
+VALUES ('Skidbladnir','snekkar','905-04-01',1400);
+INSERT INTO statek (nazwa_statku,rodzaj_statku,data_wodowania,max_ladownosc)
+VALUES ('Herskip','knar','908-08-12',1200);
+
+ALTER TABLE postacie ADD COLUMN funkcja varchar(40) AFTER rodzaj;
+UPDATE postacie SET funkcja = 'kapitan' WHERE id=1;
+ALTER TABLE postacie ADD FOREIGN KEY(statek) references swiderm.statek(nazwa_statku);
+UPDATE postacie SET statek='Skidbladnir' WHERE id=1;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=2;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=4;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=5;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=6;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=7;
+UPDATE postacie SET statek='Skidbladnir' WHERE id=8;
+
+DELETE FROM izba WHERE nazwa_izby= 'Spizarnia' ;
+DROP TABLE izba;
+
+
+
+
+
+
+
