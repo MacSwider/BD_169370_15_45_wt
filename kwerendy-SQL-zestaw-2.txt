@@ -1,0 +1,34 @@
+ZAD 1;
+
+DELETE FROM postacie WHERE rodzaj = 'wiking' AND nazwa != 'Bjorn' ORDER BY wiek DESC LIMIT 2;
+
+
+
+
+ALTER TABLE walizka DROP FOREIGN KEY walizka_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_1;
+ALTER TABLE przetwory DROP FOREIGN KEY przetwory_ibfk_2;
+ALTER TABLE postacie MODIFY id int;
+ALTER TABLE postacie DROP PRIMARY KEY
+
+ZAD 2
+ALTER TABLE postacie ADD pesel char(11) NOT NULL FIRST;
+UPDATE postacie SET pesel='25423416432' WHERE id=1;
+UPDATE postacie SET pesel='05694255242' WHERE id=2;
+UPDATE postacie SET pesel='84737572741' WHERE id=3;
+UPDATE postacie SET pesel='94823069295' WHERE id=5;
+UPDATE postacie SET pesel='56829521423' WHERE id=6;
+UPDATE postacie SET pesel='02959285344' WHERE id=8;
+ALTER TABLE postacie ADD PRIMARY KEY (pesel);
+
+ALTER TABLE postacie MODIFY rodzaj  enum ('ptak', 'wiking', 'kobieta','syrena');
+
+INSERT into postacie (pesel,id,nazwa,rodzaj,data_ur,wiek)
+VALUES ('75932453416','9','Gertruda Nieszczera','syrena','750-05-11', '143');
+
+
+
+
+(poprawka do zad.5 z poprzedniej listy) dodać i skasować
+ALTER TABLE postacie ADD FOREIGN KEY (statek) references swiderm.statek(nazwa_statku);
+ALTER TABLE postacie ADD COLUMN statek varchar(30) AFTER funkcja;
