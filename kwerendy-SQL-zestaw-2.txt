@@ -26,7 +26,44 @@ ALTER TABLE postacie MODIFY rodzaj  enum ('ptak', 'wiking', 'kobieta','syrena');
 INSERT into postacie (pesel,id,nazwa,rodzaj,data_ur,wiek)
 VALUES ('75932453416','9','Gertruda Nieszczera','syrena','750-05-11', '143');
 
+ZAD 3
+UPDATE postacie SET statek = 'Skidbladnir' WHERE nazwa regexp 'a' AND nazwa != 'tesciowa';
+UPDATE statek SET data_wodowania = '2012-04-05' WHERE nazwa_statku = 'Skidbladnir';
+UPDATE statek SET max_ladownosc = max_ladownosc*0.7 WHERE data_wodowania > '2000-01-01';
+ALTER TABLE postacie MODIFY wiek int CHECK (wiek BETWEEN 0 AND 1000);
 
+ZAD 4 
+ALTER TABLE postacie MODIFY rodzaj  enum ('ptak', 'wiking', 'kobieta','syrena','waz');
+INSERT INTO postacie (pesel,id,nazwa, rodzaj, data_ur, wiek)
+VALUES ('85946520513',10,'Loko','waz','750-10-25','241');
+
+
+CREATE TABLE marynarz
+(pesel char(11),
+id int,
+nazwa varchar(40),
+rodzaj enum ('ptak', 'wiking', 'kobieta','syrena','waz'),
+funkcja varchar(40),
+statek varchar(30),
+data_ur date,
+wiek int);
+INSERT INTO marynarz SELECT * FROM postacie WHERE statek ='Skidbladnir';
+
+ZAD 5
+
+UPDATE postacie SET statek = NULL where statek = 'Skidbladnir';
+UPDATE marynarz SET statek= NULL where statek = 'Skidbadnir';
+DELETE FROM postacie WHERE id ='5';
+
+ALTER TABLE postacie DROP FOREIGN KEY postacie_ibfk_1;
+ALTER TABLE marynarz DROP FOREIGN KEY marynarz_ibfk_1;
+DROP TABLE statek;
+
+CREATE TABLE zwierz ( id INT PRIMARY KEY AUTO_INCREMENT, nazwa VARCHAR(20), wiek INT);
+    
+
+INSERT INTO zwierz (nazwa, wiek)  SELECT nazwa, wiek FROM postacie  WHERE rodzaj='ptak';
+INSERT INTO zwierz (nazwa, wiek)  SELECT nazwa, wiek FROM postacie  WHERE rodzaj='waz';
 
 
 (poprawka do zad.5 z poprzedniej listy) dodać i skasować
