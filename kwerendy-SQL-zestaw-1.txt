@@ -90,6 +90,7 @@ VALUES ('Herskip','knar','908-08-12',1200);
 
 ALTER TABLE postacie ADD COLUMN funkcja varchar(40) AFTER rodzaj;
 UPDATE postacie SET funkcja = 'kapitan' WHERE id=1;
+ALTER TABLE postacie ADD COLUMN statek varchar(30) AFTER funkcja;
 ALTER TABLE postacie ADD FOREIGN KEY(statek) references swiderm.statek(nazwa_statku);
 UPDATE postacie SET statek='Skidbladnir' WHERE id=1;
 UPDATE postacie SET statek='Skidbladnir' WHERE id=2;
