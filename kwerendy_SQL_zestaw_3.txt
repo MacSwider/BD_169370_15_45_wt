@@ -15,3 +15,15 @@ ZAD 3
 SELECT*FROM zasob WHERE MONTH(dataPozyskania) BETWEEN 7 AND 8;
 SELECT*FROM zasob WHERE rodzaj != 'NULL' ORDER BY waga DESC;
 SELECT*FROM kreatura ORDER BY dataUr DESC LIMIT 5;
+
+ZAD 4
+SELECT DISTINCT rodzaj FROM zasob WHERE rodzaj IS NOT NULL;
+SELECT rodzaj FROM zasob GROUP BY rodzaj HAVING COUNT(*) < 2;
+SELECT CONCAT(nazwa, ' - ', rodzaj) FROM kreatura WHERE rodzaj LIKE 'wi%';
+SELECT ilosc*waga FROM zasob WHERE YEAR(dataPozyskania) BETWEEN 2000 AND 2007;
+
+
+ZAD 5
+SELECT nazwa, waga*0.7 AS 'netto', waga*0.3 AS 'odpadki' FROM zasob;
+SELECT*FROM zasob WHERE rodzaj IS NULL;
+SELECT DISTINCT nazwa, rodzaj FROM zasob WHERE nazwa LIKE 'Ba%' OR nazwa LIKE '%os' ORDER BY nazwa;
