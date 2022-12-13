@@ -27,4 +27,4 @@ CROSS JOIN ekwipunek ON kreatura.idKreatury = ekwipunek.idKreatury JOIN zasob ON
 
 SELECT kreatura.nazwa, zasob.idZasobu, zasob.rodzaj FROM kreatura  JOIN ekwipunek ON ekwipunek.idKreatury = kreatura.idKreatury LEFT JOIN zasob ON zasob.idZasobu = ekwipunek.idZasobu HAVING rodzaj='jedzenie' ORDER BY kreatura.dataUr ASC  LIMIT 5;
 
-SELECT e.nazwa, m.nazwa, e.idKreatury, m.idKreatury FROM kreatura e INNER join kreatura m ON (e.idKreatury - m.idKreatury) = 5;
+SELECT e.nazwa AS nazwa_A, m.nazwa AS nazwa_B, e.idKreatury AS idKreatury_A, m.idKreatury AS idKreatury_B FROM kreatura e INNER join kreatura m ON (e.idKreatury - m.idKreatury) = 5;
